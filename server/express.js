@@ -6,6 +6,16 @@ export const app = express();
 app.use(json());
 app.use(cors());
 
-app.listen(5000, () => {
+const server = app.listen(5000, () => {
   console.log("server has started at post ", 5000);
 });
+
+// const gracefulShutdown = async (signal) => {
+//   console.log("Recieved graceful shutdown", { signal });
+//   await server.close();
+//   process.exit();
+// };
+
+// process.on("SIGINT", gracefulShutdown);
+// process.on("SIGTERM", gracefulShutdown);
+    

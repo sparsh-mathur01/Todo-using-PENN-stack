@@ -4,14 +4,21 @@ import {
   createTodo,
   updateTodo,
   deleteTodo,
-} from "../controllers/todoController.js";
+} from "../controllers/todo.controller.js";
+import { isMyTodoMiddleware } from "../middlewares/isMyTodo.middleware.js";
 
-export const router = express.Router();
-// create todo
-router.post("/create", createTodo);
+export const todoRoutes = express.Router();
+
+
 // get all todos
-router.get("/", async (req, res) => await getAllTodos(req, res));
+todoRoutes.get("/", getAllTodos);
+// create todo
+todoRoutes.post("/create", createTodo);
+
+//isMyTodoMiddleWare
+todoRoutes.use("/:todoId", isMyTodoMiddleware);
+
 //update a todo
-router.put("/:todoId", async (req, res) => await updateTodo(req, res));
+todoRoutes.put("/:todoId", updateTodo);
 //delete a todo
-router.delete("/:todoId", async (req, res) => await deleteTodo(req, res));
+todoRoutes.delete("/:todoId", deleteTodo);

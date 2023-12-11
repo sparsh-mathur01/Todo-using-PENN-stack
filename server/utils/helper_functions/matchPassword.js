@@ -1,9 +1,9 @@
 import CryptoJs from "crypto-js";
 
 export async function matchPassword(password, cipher) {
-  const originalPassword = CryptoJs.AES.decrypt(
-    cipher,
+  const hash = CryptoJs.AES.encrypt(
+    password,
     process.env.PASS_SECRET_KEY
-  ).toString(CryptoJs.enc.Utf8);
-  return password === originalPassword;
+  ).toString();
+  return hash === cipher;
 }
